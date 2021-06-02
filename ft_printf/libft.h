@@ -6,7 +6,7 @@
 /*   By: marhamba <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/02 18:59:59 by marhamba          #+#    #+#             */
-/*   Updated: 2021/02/15 20:12:42 by marhamba         ###   ########.fr       */
+/*   Updated: 2021/06/02 21:34:17 by marhamba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <unistd.h>
 # include <string.h>
 # include <stdlib.h>
+#include "ft_printf.h"
 
 typedef struct	s_list
 {

@@ -5,6 +5,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include  "libft.h"
+#include <stdarg.h>
 
 
 typedef struct		s_flags
@@ -24,14 +25,14 @@ t_flags	flags;
 
 int			ft_printf(const char *format, ...);
 t_flags		make_zeros(t_flags flags);
-int			ft_check_format(char **format, va_list list);
+int			ft_check_format(char **format);
 void		ft_check_convs(char **format);
 void		print_minus1(int space, char *charg);
 void		print_minus0(int space, char *charg);
 void		ft_minus_cases(int	len, int space, char *charg);
 void		notminus_cases(int len, int space, char *charg);
 void		ft_treat_decimal();
-t_flags		ft_check_flags(const char **format, t_flags flags);
+void		ft_check_flags(const char **format);
 
 #endif
 

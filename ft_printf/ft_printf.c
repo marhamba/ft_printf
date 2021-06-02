@@ -6,7 +6,7 @@
 /*   By: marhamba <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/31 15:15:31 by marhamba          #+#    #+#             */
-/*   Updated: 2021/06/01 20:25:31 by marhamba         ###   ########.fr       */
+/*   Updated: 2021/06/02 21:34:05 by marhamba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ t_flags     make_zeros(t_flags flags)
 
 
 //d-i hamar flager stugel
-int     ft_check_format(char **format, va_list list)
+int     ft_check_format(char **format)
 {
     format++;
     if (**format >= '0' && **format <= '9')
@@ -37,7 +37,7 @@ int     ft_check_format(char **format, va_list list)
     {
         flags.star = 1;
         flags.width = va_arg(flags.list, int);
-    	*format++;
+    	format++;
 	}
     if (**format == '.')
     {
@@ -47,26 +47,30 @@ int     ft_check_format(char **format, va_list list)
             flags.prec = ft_atoi(++*format);
 	}
 	format++;
-	ft_check_convs(*format);
+	ft_check_convs(format);
+	return (0);
 }
 
 void	ft_check_convs(char **format)
 {
 	if (**format == 'd' || **format == 'i')
 		ft_treat_decimal();
-	else if (**format == 'c')
-		ft_treat_char();
-	else if (**format == 's')
-		ft_treat_string();
-	else if (**format == 'u')
-		ft_treat_unsigned();
-	else if (**format 'x' || **format == 'X')
-		ft_treat_hexa();
-	else if (**format == 'p')
-		ft_treat_pointer();
-	else if (**format == '%')
-		ft_treat_percent();
+	//else if (**format == 'c')
+	//	ft_treat_char();
+	//else if (**format == 's')
+	//	ft_treat_string();
+	//else if (**format == 'u')
+	//	ft_treat_unsigned();
+//	else if (**format == 'x' || **format == 'X')
+//		ft_treat_hexa();
+//	else if (**format == 'p')
+//		ft_treat_pointer();
+//	else if (**format == '%')
+//		ft_treat_percent();
 }
+
+
+
 
 void	print_minus1(int	space, char *charg)
 {
@@ -74,7 +78,7 @@ void	print_minus1(int	space, char *charg)
 		ft_putchar('0');
 	ft_putstr(charg);
 	while (space--)
-		ft_ft_putchar(' ');
+		ft_putchar(' ');
 }
 
 void	print_minus0(int	space, char *charg)
@@ -113,6 +117,18 @@ void	ft_notminus_cases(int len, int space, char *charg)
 		ft_putstr(charg);
 }
 
+void	ft_treat_char()
+{
+	int		arg;
+	int		space;
+
+	arg = va_arg(flags.list, char);
+	space = flags.width - 1;
+	if (flags.width > 0)
+
+
+}
+
 void	ft_treat_decimal()
 {
 	int		arg; //va_argic vercracy tiv
@@ -126,13 +142,13 @@ void	ft_treat_decimal()
 	flags.zero -= len;
 	space = flags.width - flags.prec;
 	if (flags.minus == 0)
-		ft_minus_cases(len space, chrag);
+		ft_minus_cases(len, space, charg);
 	else
-		ft_not_minus_cases(len, space, charg);
+		ft_notminus_cases(len, space, charg);
 }
 
 
-t_flags     ft_check_flags(const char **format, t_flags flags)
+void     ft_check_flags(const char **format)
 {
     if (**format == '0' || **format == '-')
     {
@@ -147,15 +163,15 @@ t_flags     ft_check_flags(const char **format, t_flags flags)
             flags.minus = 0;
         }
     }
-	if ()
 }
 
 
 int		ft_printf(const char *format, ...)
 {
 	int res;
-    const char *;
+	char *print;
 
+	print = (char *)format;
     res = 0;
     if (!(print = malloc(sizeof(t_flags))))
         return (-1);
@@ -165,10 +181,6 @@ int		ft_printf(const char *format, ...)
         write(1, &format, 1);
         format++;
     }
-    if (*format == '%')
-	{
-		ft_check_flags(&format);
-		ft_check_format(&format, list);
-	}
+    (*format == '%') ? ft_check_flags(&format) : ft_check_format(&print);
 	return (flags.count);	
 }
