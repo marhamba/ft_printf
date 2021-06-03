@@ -6,7 +6,7 @@
 /*   By: marhamba <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/31 15:15:31 by marhamba          #+#    #+#             */
-/*   Updated: 2021/06/02 21:34:05 by marhamba         ###   ########.fr       */
+/*   Updated: 2021/06/03 19:11:01 by marhamba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,20 +27,24 @@ t_flags     make_zeros(t_flags flags)
 //d-i hamar flager stugel
 int     ft_check_format(char **format)
 {
+	printf("%s", "check---1\n");
     format++;
     if (**format >= '0' && **format <= '9')
 	{
+		printf("%s", "if-check---2\n");
         flags.width = ft_atoi(*format);
     	format++;
 	}
 	else if (**format == '*')
     {
+		printf("%s", "check---3*\n");
         flags.star = 1;
         flags.width = va_arg(flags.list, int);
     	format++;
 	}
     if (**format == '.')
     {
+		printf("%s", "check---dot\n");
         if (++**format == '*')
             flags.prec = va_arg(flags.list, int);
         else if (**format >= '0' && **format <= '9')
@@ -122,11 +126,10 @@ void	ft_treat_char()
 	int		arg;
 	int		space;
 
-	arg = va_arg(flags.list, char);
+	arg = va_arg(flags.list, int);
 	space = flags.width - 1;
-	if (flags.width > 0)
-
-
+	flags.prec = 0;
+	//if (flags.width > 0)
 }
 
 void	ft_treat_decimal()
@@ -148,21 +151,48 @@ void	ft_treat_decimal()
 }
 
 
-void     ft_check_flags(const char **format)
+void     ft_check_flags(const char *format)
 {
-    if (**format == '0' || **format == '-')
-    {
-        if (**format == '-')
-        {
-            flags.zero = 0;
-            flags.minus = 1;
-        }
-        else
-        {
-            flags.zero = 1;
-            flags.minus = 0;
-        }
-    }
+	printf("%s", "check---flags\n");
+	while (format++)
+	{
+		printf("%s", "check_____flagswhile\n");
+		if (*format == '-' || *format == '0')
+		{
+			printf("%s", "check___flaaaaagsif");
+			// (**format == '-') ? flags.minus = 1 : 0;
+			// (**format == '0') ? flags.zero = 1 : 0;
+		}
+		if (*format != '-' || *format != '0')
+			printf("%s\n", "if--chi--mtnum");
+		else if (*format == '.')
+			flags.dot = 1;
+		else if (*format == '*')
+			flags.star = 1;
+		// (**format == '.') ? flags.dot = 1 : 0;
+		// (**format == '*') ? flags.star = 1 : 0;
+		printf("%d\n", flags.dot);
+		// printf("%d\n", flags.star);
+	}
+}
+
+void	ft_printf2(const char *format, char *print)
+{
+	while (*format != '%')
+	{
+	//	printf("%s", "while\n");
+		ft_putchar(*format);
+		format++;
+	}
+	if (*format == '%')
+	{
+	//	printf("%s", "if\n");
+		ft_check_flags(format);
+		ft_check_format(&print);
+	}
+//	(*format == '%') ? ft_check_flags(&format) : ft_check_format(&print);
+	if (*format && *format != '%')
+		write (1, &format, 1);
 }
 
 
@@ -170,17 +200,23 @@ int		ft_printf(const char *format, ...)
 {
 	int res;
 	char *print;
+	va_list	list;
 
+	va_start(list, format);
 	print = (char *)format;
     res = 0;
-    if (!(print = malloc(sizeof(t_flags))))
-        return (-1);
+    //if (!(print = malloc(sizeof(t_flags))))
+       // return (-1);
     make_zeros(flags);
-    while (*format != '%')
-    {
-        write(1, &format, 1);
-        format++;
-    }
-    (*format == '%') ? ft_check_flags(&format) : ft_check_format(&print);
-	return (flags.count);	
+    ft_printf2(format, print);
+	va_end(list);
+	return (flags.count);
+	// va_end(list);	
+}
+
+
+int	main()
+{
+	ft_printf(" sss%-.d \n\n", 0);
+	//ft_printf("%d", flags.count);
 }

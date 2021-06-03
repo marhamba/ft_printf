@@ -32,7 +32,7 @@ void		print_minus0(int space, char *charg);
 void		ft_minus_cases(int	len, int space, char *charg);
 void		notminus_cases(int len, int space, char *charg);
 void		ft_treat_decimal();
-void		ft_check_flags(const char **format);
+void		ft_check_flags(const char *format);
 
 #endif
 
