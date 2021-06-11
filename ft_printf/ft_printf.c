@@ -25,40 +25,70 @@ t_flags     make_zeros(t_flags flags)
 
 
 //d-i hamar flager stugel
-int     ft_check_format(char **format)
+int     ft_check_format(char *format)
 {
-	// printf("%s", "check---format1\n");
+	char	*len;
+	printf("%s", "check---format1\n");
     format++;
-    if (**format >= '0' && **format <= '9')
+	if (*format == '%')
+		format++;
+	while (*format >= '0' && *format <= '9')
 	{
 		printf("%s", "if-check---format_if2\n");
-        flags.width = ft_atoi(*format);
-    	format++;
+        flags.width = ft_atoi(format);
+		printf("%d\n", flags.width);
+		len = ft_itoa(flags.width);
+		while(*len)
+		{
+			if(*format == '.')
+				break;
+			format++;
+			len--;
+		}
 	}
-	else if (**format == '*')
+	if (*format == '*')
     {
 		printf("%s", "check--format-elseif3*\n");
         flags.star = 1;
         flags.width = va_arg(flags.list, int);
     	format++;
 	}
-    if (**format == '.')
+    if (*format == '.')
     {
-		printf("%s", "check--format_if3-dot\n");
-        if (++**format == '*')
+		format++;
+		printf("%s", "check--format_if3-dot\n\n");
+        if (*format == '*')
+		{
+			printf("%s", "--if");
             flags.prec = va_arg(flags.list, int);
-        else if (**format >= '0' && **format <= '9')
-            flags.prec = ft_atoi(++*format);
+		}
+		else if (*format >= '0' && *format <= '9')
+        {
+			printf("%s", "--else");
+		    flags.prec = ft_atoi(format);
+		}
+		printf("%d\n", flags.prec);
 	}
 	format++;
 	ft_check_convs(format);
 	return (0);
 }
 
-void	ft_check_convs(char **format)
+void	ft_check_convs(char *format)
 {
-	if (**format == 'd' || **format == 'i')
-		ft_treat_decimal();
+	printf("\n%s", "check_convsss\n");
+	// while (*format != 'd' || *format != 'i')
+	// {
+		format++;
+		if (*format == 'd' || *format == 'i')
+		{
+			printf("%s\n", "decimal check");
+			ft_treat_decimal();
+			printf("%s\n", "blaba");
+		}
+		// format++;
+		printf("%s\n", "angam--");
+	// }
 	//else if (**format == 'c')
 	//	ft_treat_char();
 	//else if (**format == 's')
@@ -132,14 +162,17 @@ void	ft_treat_char()
 	//if (flags.width > 0)
 }
 
-void	ft_treat_decimal()
+void		ft_treat_decimal()
 {
+	printf("\n%s", "decimal--1");
 	int		arg; //va_argic vercracy tiv
 	int		len;
 	char	*charg; //argi char sarqac tesaky
 	int		space;
 
 	arg = va_arg(flags.list, int);
+	if (!(charg = malloc(1000)))
+		return ;
 	charg = ft_itoa(arg);
 	len = ft_strlen(charg);
 	flags.zero -= len;
@@ -148,6 +181,7 @@ void	ft_treat_decimal()
 		ft_minus_cases(len, space, charg);
 	else
 		ft_notminus_cases(len, space, charg);
+	free(charg);
 }
 
 
@@ -189,7 +223,7 @@ void	ft_printf2(const char *format, char *print)
 	{
 	//	printf("%s", "if\n");
 		ft_check_flags(format);
-		ft_check_format(&print);
+		ft_check_format(print);
 	}
 //	(*format == '%') ? ft_check_flags(&format) : ft_check_format(&print);
 	if (*format && *format != '%')
@@ -216,6 +250,6 @@ int		ft_printf(const char *format, ...)
 
 int	main()
 {
-	ft_printf(" sss%12.5d\n\n", 22);
+	ft_printf("%14.*d\n\n", 12, 22);
 	//ft_printf("%d", flags.count);
 }
