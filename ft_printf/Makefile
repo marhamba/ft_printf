@@ -19,6 +19,7 @@ $(NAME) : ${OBJS}
 
 
 all : ${NAME}
+	gcc -Wall -Wextra -Werror *.c
 
 clean :
 	${RM} ${OBJS} ${BONUS_OBJS}
