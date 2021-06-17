@@ -14,14 +14,15 @@
 
 void	ft_putstr(char *s)
 {
+	// printf("\n%s", s);
 	int i;
 
 	i = 0;
 	if (!s)
 		return ;
-	while (s[i])
+	while (s[i] != '\0')
 	{
-		ft_putchar(s[i]);
-		i++;
+		ft_putchar(*s);
+		s++;
 	}
 }
