@@ -1,28 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   f_putstr_fd.c                                      :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: marhamba <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/02/05 17:30:13 by marhamba          #+#    #+#             */
-/*   Updated: 2021/02/05 19:01:10 by marhamba         ###   ########.fr       */
+/*   Created: 2021/02/01 20:17:07 by marhamba          #+#    #+#             */
+/*   Updated: 2021/02/01 20:17:37 by marhamba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_putstr(char *s)
+size_t	ft_strlen(char *s)
 {
-	// printf("\n%s", s);
-	int i;
+	size_t		i;
 
-	i = 0;
 	if (!s)
-		return ;
-	while (s[i] != '\0')
+		return (0);
+	i = 0;
+	while (*s)
 	{
-		ft_putchar(*s);
 		s++;
+		i++;
 	}
+	return (i);
 }

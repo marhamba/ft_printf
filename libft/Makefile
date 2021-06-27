@@ -1,7 +1,8 @@
-SRCS		= $(shell find "." -name "*c")
+SRCS		= $(shell find "." -name "*c" ! -name "ft_lst*.c")
+BONUSES 	= $(shell find "." -name "*ft_lst*.c")
 OBJS		= ${SRCS:.c=.o}
 BONUS_OBJS  = ${BONUSES:.c=.o}
-NAME		= libftprintf.a
+NAME		= libft.a
 CC			= gcc
 RM			= rm -f
 CFLAGS		= -Wall -Wextra -Werror
@@ -11,18 +12,18 @@ AR			= ar csr
 	${CC} ${CFLAGS} -c $< -o ${<:.c=.o}
 
 $(NAME) : ${OBJS}
-	$(MAKE) -C ./libft
-	cp $(LIBFT) ${NAME}
-	${AR} libftprintf.a ${OBJS}
+	${AR} libft.a ${OBJS}
+
+ bonus : ${BONUS_OBJS}
+	${AR} libft.a ${BONUS_OBJS}
+
 
 all : ${NAME}
 
 clean :
-	$(MAKE) clean -C ./libft
-	${RM} ${OBJS}
+	${RM} ${OBJS} ${BONUS_OBJS}
 
 fclean : clean
-	$(MAKE) clean -C ./libft
 	${RM} ${NAME}
 
 re : fclean all
