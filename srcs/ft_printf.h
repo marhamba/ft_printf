@@ -6,6 +6,8 @@
 #include <stdlib.h>
 #include  "../libft/libft.h"
 #include <stdarg.h>
+#include <limits.h>
+
 
 typedef struct		s_flags
 {
@@ -23,6 +25,8 @@ typedef struct		s_flags
 	int		r;
 	int		minusn;
 	char	argc;
+	int		isprec;
+	int		pz;
 }					t_flags;
 
 t_flags	flags;
