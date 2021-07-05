@@ -4,7 +4,7 @@ LIBFT		= ./libft/libft.a
 NAME		= libftprintf.a
 CC			= gcc
 RM			= rm -f
-CFLAGS		= -Wall -Wextra -Werror
+#CFLAGS		= -Wall -Wextra -Werror
 AR			= ar csr
 
 .c.o :

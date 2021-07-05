@@ -27,6 +27,7 @@ typedef struct		s_flags
 	char	argc;
 	int		isprec;
 	int		pz;
+	char	*string;
 }					t_flags;
 
 t_flags	flags;
@@ -39,7 +40,7 @@ void		print_minus1(int space, char *charg);
 void		print_minus0(int space, char *charg);
 void		ft_minus_cases(int	len, int space, unsigned int zero, char **charg);
 void		ft_notminus_cases(int len, int space, unsigned int zero, char **charg, char *print);
-void		ft_treat_decimal(char *print);
+int			ft_treat_decimal();
 void		ft_check_flags(const char *format);
 void		ft_printf2(char *print);
 int			ft_dot_function(char *format);
@@ -50,6 +51,7 @@ void		ft_printdec_case4(char **charg);
 void		ft_printdec_case5(int space, unsigned int zero, char **charg);
 void		ft_printdec_case6(int len, unsigned int space, char **charg);
 void		ft_treat_char();
+void		ft_treat_string(char *format);
 
 #endif
 
