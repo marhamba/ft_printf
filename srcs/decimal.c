@@ -63,6 +63,7 @@ int	ft_treat_decimal()
 		}
 		if (flags.minus)
 		{
+                        // printf("check\n\n\n");
 			while (zero > 0)
 			{
 				ft_putchar('0');
@@ -70,21 +71,19 @@ int	ft_treat_decimal()
 			}
 			if (flags.pz)
 				ft_putstr(charg);
-			if (flags.width > flags.prec && flags.arg > 0)
+			else if (flags.width > flags.prec && flags.arg > 0)
 				space = flags.width - len;
-			if (flags.width > flags.prec && flags.prec > len && flags.arg != 0 && flags.width - flags.prec == len)
+			else if (flags.width > flags.prec && flags.prec > len && flags.arg != 0 && flags.width - flags.prec == len)
 				space -= 1;
-			if (flags.prec == len && flags.width > flags.prec && flags.arg == 1)
+			else if (flags.prec == len && flags.width > flags.prec && flags.arg == 1)
 				space -= 1;
-			if ((flags.width - flags.prec) < len && flags.negative)
+			else if ((flags.width - flags.prec) < len && flags.negative)
 				space = 0;
-			if (flags.width > flags.prec && flags.prec > len && flags.width - flags.prec > len)
+			else if (flags.width > flags.prec && flags.prec > len && flags.width - flags.prec > len)
 				space = flags.width - flags.prec;
-			if (flags.width > flags.prec && flags.prec > len && flags.negative && flags.minus)
-			{
-				
+			else if (flags.width > flags.prec && flags.prec > len && flags.negative && flags.minus)
 				space -= 1; 
-			}
+
 			while (space > 0)
 			{
 				ft_putchar(' ');
@@ -118,11 +117,17 @@ int	ft_treat_decimal()
 		if (flags.width == 0 && flags.prec == 0 && flags.arg == 0 && flags.star && flags.dot)
 			flags.pz = 1;
 		else if (flags.width == 0 && flags.dot && flags.isprec == 0 && flags.arg == 0 && flags.prec == 0)
+        {
+            free(charg);
 			return (0);
+        }
 		else if (flags.arg == 0 && flags.isprec == 0 && (flags.width == 0 || flags.width > 0 || (flags.zero && flags.width > 0)))
 				flags.arg = 0;
 		else if ((flags.prec == 0 && flags.arg == 0 && flags.isprec == 0) ||  (flags.prec == 0 && flags.arg == 0 && flags.width == 0))
+        {
+            free(charg);
 			return (0);
+        }
 		else if (flags.width && flags.prec == 0 && flags.isprec == 1 && flags.arg == 0 && !flags.zero)
 		{
 			space = flags.width < 0 ? flags.width * -1 : flags.width;
@@ -180,7 +185,6 @@ int	ft_treat_decimal()
 			ft_putchar('-');
 		if (flags.dot || flags.zero)
 		{
-            // printf("check\n\n\n");
 			if (flags.dot && flags.zero)
 			{
 				if (flags.width > flags.prec && flags.zero && flags.prec == 0 && flags.isprec && flags.arg == 0)
@@ -201,12 +205,23 @@ int	ft_treat_decimal()
 						zero = flags.prec - len;
 						space = flags.width - zero;
 					}
+                    if (flags.negative && flags.arg == INT_MIN)
+                    {
+                        flags.negative = 0;
+                        space += 1;
+                    }
+                    // printf("barev");
 				}
 				
 				if (!(flags.width && flags.prec > 0 && len == 1 && flags.arg == 1 && flags.prec != 1))
 				{
 					flags.zero = 0;
 					zero = 0;
+                    if (flags.width < flags.prec && flags.star && flags.negative)
+                    {
+                        zero = flags.prec - len;
+                        space = 0;
+                    }
 				}
 				else
 				{
@@ -217,7 +232,7 @@ int	ft_treat_decimal()
 						zero += 1;
 					space = 0;
 					if (flags.width > flags.prec && flags.prec > len && flags.arg == 1)
-					{
+					{ // stex1
 						zero = flags.prec - len;
 						space = flags.width - (zero + len) - 1;
 					}

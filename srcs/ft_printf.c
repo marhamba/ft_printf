@@ -107,6 +107,7 @@ int		ft_printf(const char *format, ...)
 {
 	char *print;
 
+	flags.count = 0;
 	va_start(flags.list, format);
 	print = (char *)format;
     ft_printf2(print);

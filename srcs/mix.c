@@ -8,7 +8,6 @@ void     make_zeros()
     flags.prec = 0;
     flags.star = 0;
 	flags.arg = 0;
-	flags.count = 0;
 	flags.zero = 0;
 	flags.negative = 0;
     flags.isprec = 0;
@@ -69,25 +68,25 @@ void	ft_check_convs(char *format)
 		}
 }
 
-void     ft_check_flags(const char *format)
-{
-	while (!(*format >= '1' && *format <= '9'))
-	{
-		if (*format == '-' || *format == '0')
-		{
-			(*format == '-') ? flags.minus = 1 : 0;
-			(*format == '0') ? flags.zero = 1 : 0;
-		}
-		else if (*format != '-' || *format != '0')
-		if (*format == '.')
-			flags.dot = 1;
-		if (*format == '*')
-			flags.star = 1;
-		(*format == '.') ? flags.dot = 1 : 0;
-		(*format == '*') ? flags.star = 1 : 0;
-		format++;
-	}
-}
+// void     ft_check_flags(const char *format)
+// {
+// 	while (!(*format >= '1' && *format <= '9'))
+// 	{
+// 		if (*format == '-' || *format == '0')
+// 		{
+// 			(*format == '-') ? flags.minus = 1 : 0;
+// 			(*format == '0') ? flags.zero = 1 : 0;
+// 		}
+// 		else if (*format != '-' || *format != '0')
+// 		if (*format == '.')
+// 			flags.dot = 1;
+// 		if (*format == '*')
+// 			flags.star = 1;
+// 		(*format == '.') ? flags.dot = 1 : 0;
+// 		(*format == '*') ? flags.star = 1 : 0;
+// 		format++;
+// 	}
+// }
 
 void	ft_printf2(char *print)
 {
