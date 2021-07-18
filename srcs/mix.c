@@ -54,46 +54,32 @@ void	ft_check_convs(char *format)
 		if (*format == 'd' || *format == 'i')
 		{
 			flags.arg = va_arg(flags.list, int);
-			// ft_final(space, zero, charg);
 			ft_treat_decimal();
-			// ft_putstr(flags.arg);
 		}
 		else if (*format == 'c')
 		{
 			flags.arg = va_arg(flags.list, int);
 			ft_putchar(flags.arg);
-			// ft_treat_char();
 		}
 		else if (*format == 's')
 		{
 			flags.string = va_arg(flags.list, char *);
 			ft_putstr(flags.string);
-			// ft_treat_string(format);
 		}
 		else if (*format == 'p')
 		{
 			ft_treat_all();
 		}
-		if (*format == 'u')
+		else if (*format == 'u')
+			ft_treat_unsigned();
+		else if (*format == 'x' || *format == 'X')
 		{
-			char *str;
-
-			flags.uarg = va_arg(flags.list, long double);
-				printf("check---%u", flags.uarg);
-			str = ft_itoa(flags.uarg);
-			// printf("\n%s\n", str);
-			if (str[0] == '-')
-			{
-				// printf("barev");
-				flags.uarg *= (-1);
-				flags.uarg = UINT_MAX - flags.uarg + 1;
-				free(str);
-				str = ft_itoa(flags.uarg);	
-			}
-			ft_putstr(str);
-			free(str);
+			if (*format == 'X')
+				flags.areg = 1;
+			else
+				flags.areg = 0;
+			ft_treat_hexa();
 		}
-		// ft_treat_all();
 }
 
 void	ft_printf2(char *print)

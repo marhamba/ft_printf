@@ -79,7 +79,6 @@ void    ft_treat_decimal()
             zero = flags.prec;
     }
     ft_final(space, zero, charg);
-    // ft_putstr(charg);
     free(charg);
 }
 
@@ -90,4 +89,44 @@ void    ft_treat_all()
     charg = ft_itoa(flags.arg);
     ft_putstr(charg);
     free(charg);
+}
+
+char    *ft_dectohex(int arg)
+{
+    int i;
+    char *str;
+    int mod;
+
+    i = 0;
+    while (arg)
+    {
+        mod = arg % 16;
+        arg /= 16;
+        if (mod > 9)
+        {
+            if (flags.areg == 1)
+                 mod += 55;
+            else
+                mod += 87;
+        }
+        else
+            mod+=48;
+        str[i] = mod;
+        // printf("\nstri------%c\n",str[i]);
+        // printf("\nmod-----%d\n", mod);
+        // printf("\ncheck\n");
+        i++;
+    }
+    printf("\nstr---%s\n", str);
+    str[i] = '\0';
+    return(str);
+}
+
+void    ft_treat_hexa()
+{
+    int arg;
+    flags.arg = va_arg(flags.list, unsigned int);
+    arg = flags.arg;
+
+    ft_dectohex(arg);
 }

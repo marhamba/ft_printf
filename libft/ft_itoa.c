@@ -12,7 +12,7 @@
 
 #include "libft.h"
 
-static int		ft_len(long long num)
+static int		ft_len(long num)
 {
 	int len;
 
@@ -32,12 +32,12 @@ static int		ft_len(long long num)
 	return (len);
 }
 
-char			*ft_itoa(long long n)
+char			*ft_itoa(long n)
 {
 	int		length;
 	char	*str;
 	int		i;
-	long long num;
+	long num;
 
 	num = n;
 	length = ft_len(num);
@@ -58,5 +58,6 @@ char			*ft_itoa(long long n)
 		num /= 10;
 	}
 	str[length] = '\0';
+	// printf("\nbarev---%s\n", str);
 	return (str);
 }
