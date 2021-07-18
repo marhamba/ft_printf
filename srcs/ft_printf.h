@@ -28,6 +28,8 @@ typedef struct		s_flags
 	int		isprec;
 	int		pz;
 	char	*string;
+	unsigned long	point;
+	long long	uarg;
 }					t_flags;
 
 t_flags	flags;
@@ -52,6 +54,7 @@ void		ft_printdec_case5(int space, unsigned int zero, char **charg);
 void		ft_printdec_case6(int len, unsigned int space, char **charg);
 void		ft_treat_char();
 void		ft_treat_string(char *format);
+void		ft_treat_pointer();
 void		ft_final(int space, int zero, char *charg);
 
 #endif

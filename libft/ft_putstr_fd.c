@@ -18,7 +18,10 @@ void	ft_putstr(char *s)
 
 	i = 0;
 	if (!s)
+	{
+		free(s);
 		return ;
+	}
 	while (s[i] != '\0')
 	{
 		ft_putchar(s[i]);

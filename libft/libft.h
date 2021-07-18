@@ -53,7 +53,7 @@ char			*ft_substr(char const *s, unsigned int start, size_t len);
 char			*ft_strjoin(char const *s1, char const *s2);
 char			*ft_strtrim(char const *s1, char const *set);
 char			**ft_split(char const *s, char c);
-char			*ft_itoa(int n);
+char			*ft_itoa(long long n);
 char			*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 void			ft_putchar(char c);
 void			ft_putstr(char *s);
@@ -67,6 +67,7 @@ t_list			*ft_lstlast(t_list *lst);
 void			ft_lstdelone(t_list *lst, void (*del)(void*));
 void			ft_lstclear(t_list **lst, void (*del)(void*));
 void			ft_lstiter(t_list *lst, void (*f)(void *));
+char			*ft_uitoa(unsigned int n);
 t_list			*ft_lstmap(t_list *lst, void *(*f)(void *),
 		void (*del)(void *));
 #endif

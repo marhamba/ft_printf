@@ -70,5 +70,6 @@ int	main()
 	// printf("%0*.10d", 21, 1);
 	// ft_printf(" --0*%-0*.20d*0 0*\n", -21, CHAR_MAX);
 	// printf(" --0*%-0*.20d*0 0*", -21, CHAR_MAX);
-	printf("%0.0d", 0);
+	printf(" %u \n", LONG_MAX);
+	ft_printf(" %u ", LONG_MAX);
 }

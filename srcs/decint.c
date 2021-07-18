@@ -46,9 +46,11 @@ void    ft_treat_decimal()
         free(charg);
         return ;
     }
-    //ete leny amenamecna >> miayn tiv
-    //ete miayn tara tvac >> miayn tiv
-    //ete width == 0&& prec == 0 >> miayn tiv
+    // ete leny amenamecna >> miayn tiv
+    // ete miayn tara tvac >> miayn tiv
+    // ete width == 0&& prec == 0 >> miayn tiv
+    if (flags.arg < 0)
+        flags.minus = 1;
     else if (flags.width && !flags.dot)
         space = flags.width - len;
     else if (flags.width == 0 && flags.prec > len && flags.arg == 0 && flags.dot)
@@ -77,5 +79,15 @@ void    ft_treat_decimal()
             zero = flags.prec;
     }
     ft_final(space, zero, charg);
+    // ft_putstr(charg);
+    free(charg);
+}
+
+void    ft_treat_all()
+{
+    char *charg;
+
+    charg = ft_itoa(flags.arg);
+    ft_putstr(charg);
     free(charg);
 }
