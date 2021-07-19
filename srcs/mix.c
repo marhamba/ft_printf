@@ -66,10 +66,6 @@ void	ft_check_convs(char *format)
 			flags.string = va_arg(flags.list, char *);
 			ft_putstr(flags.string);
 		}
-		else if (*format == 'p')
-		{
-			ft_treat_all();
-		}
 		else if (*format == 'u')
 			ft_treat_unsigned();
 		else if (*format == 'x' || *format == 'X')
@@ -80,6 +76,8 @@ void	ft_check_convs(char *format)
 				flags.areg = 0;
 			ft_treat_hexa();
 		}
+		else if (*format == 'p')
+			ft_treat_pointer();
 }
 
 void	ft_printf2(char *print)

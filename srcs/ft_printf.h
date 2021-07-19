@@ -31,6 +31,7 @@ typedef struct		s_flags
 	unsigned long	point;
 	long	uarg;
 	int	areg;
+	size_t	sarg;
 }					t_flags;
 
 t_flags	flags;
@@ -59,6 +60,7 @@ void		ft_treat_pointer();
 void		ft_final(int space, int zero, char *charg);
 void		ft_treat_unsigned();
 void		ft_treat_hexa();
+char    	*ft_dectohex(size_t arg);
 
 #endif
 

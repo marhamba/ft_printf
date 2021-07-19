@@ -82,26 +82,52 @@ void    ft_treat_decimal()
     free(charg);
 }
 
-void    ft_treat_all()
+void    ft_treat_pointer()
 {
-    char *charg;
+    flags.sarg = va_arg(flags.list, unsigned long);
+    size_t  add;
+    char *str;
+    char *s1;
 
-    charg = ft_itoa(flags.arg);
-    ft_putstr(charg);
-    free(charg);
+    s1 = "0x";
+    add = (size_t)&flags.sarg;
+    str = malloc(15);
+    if (!str)
+    {
+        free(str);
+        return ;
+    }
+    str = ft_dectohex(add);
+    str = ft_strjoin(s1, str);
+    ft_putstr(str);
+    free(str);
 }
 
-char    *ft_dectohex(int arg)
+char    *ft_dectohex(size_t arg)
 {
     int i;
     char *str;
     int mod;
+    int count;
 
+    count = 0;
     i = 0;
     while (arg)
     {
-        mod = arg % 16;
         arg /= 16;
+        count++;
+    }
+    str = malloc(count + 1);
+    if (!str)
+    {
+        free(str);
+        return (0);
+    }
+    i = count - 1;
+    while (flags.sarg)
+    {
+        mod = flags.sarg % 16;
+        flags.sarg /= 16;
         if (mod > 9)
         {
             if (flags.areg == 1)
@@ -110,23 +136,26 @@ char    *ft_dectohex(int arg)
                 mod += 87;
         }
         else
-            mod+=48;
+            mod += 48;
         str[i] = mod;
-        // printf("\nstri------%c\n",str[i]);
-        // printf("\nmod-----%d\n", mod);
-        // printf("\ncheck\n");
-        i++;
+        i--;
     }
-    printf("\nstr---%s\n", str);
-    str[i] = '\0';
     return(str);
 }
 
 void    ft_treat_hexa()
 {
-    int arg;
-    flags.arg = va_arg(flags.list, unsigned int);
-    arg = flags.arg;
+    char *str;
+    size_t arg;
+    flags.sarg = va_arg(flags.list, unsigned int);
+    arg = flags.sarg;
 
-    ft_dectohex(arg);
+    if (arg == 0)
+    {
+        ft_putchar('0');
+        return ;
+    }
+    str = ft_dectohex(arg);
+    ft_putstr(str);
+    free(str);
 }

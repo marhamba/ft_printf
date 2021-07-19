@@ -71,5 +71,9 @@ int	main()
 // 	ft_printf(" --0*%-0*.20d*0 0*\n", -21, CHAR_MAX);
 	// printf(" --0*%-0*.20d*0 0*", -21, CHAR_MAX);
 	// printf(" %u %u %u %u %u %u %u\n", INT_MAX, INT_MIN, LONG_MAX, LONG_MIN, ULONG_MAX, 0, -42);
-	ft_printf("%x", 18759);
+	// ft_printf("\n %x \n\n", -9);
+	int a;
+
+	printf(" %p \n", 15);
+	ft_printf(" %p ", 15);
 }
