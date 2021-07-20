@@ -32,6 +32,7 @@ typedef struct		s_flags
 	long	uarg;
 	int	areg;
 	size_t	sarg;
+	unsigned int	unarg;
 }					t_flags;
 
 t_flags	flags;

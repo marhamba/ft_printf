@@ -82,23 +82,51 @@ void    ft_treat_decimal()
     free(charg);
 }
 
+// void    ft_treat_pointer()
+// {
+//     flags.arg = va_arg(flags.list, unsigned long);
+//     // int *add;
+//     char *str;
+//     char *s1;
+//     size_t ret;
+//     size_t  sadd;
+//     int count;
+
+//     s1 = "0x7ff";
+//     flags.sarg = &flags.arg;
+//     sadd = (size_t)flags.sarg;
+//     printf("\nsarg---%d\n", flags.sarg);
+//     printf("\narg---%zu\n", sadd);
+//     ret = flags.sarg;
+//     while (ret)
+//     {
+//         ret /= 16;
+//         count++;
+//     }
+//     // printf("\nadd---%zu\n", add);
+//     str = malloc(count + 16);
+//     if (!str)
+//         return ;
+//     // str = ft_dectohex(sadd);
+//     // printf("\nstr---%s\n", str);
+//     // str = ft_strjoin(s1, str);
+//     ft_putstr(s1);
+//     ft_putstr(str);
+//     free(str);
+// }
+
 void    ft_treat_pointer()
 {
-    flags.sarg = va_arg(flags.list, unsigned long);
-    size_t  add;
+    int *address;
+    int ret;
     char *str;
-    char *s1;
+    size_t arg;
 
-    s1 = "0x";
-    add = (size_t)&flags.sarg;
-    str = malloc(15);
-    if (!str)
-    {
-        free(str);
-        return ;
-    }
-    str = ft_dectohex(add);
-    str = ft_strjoin(s1, str);
+    flags.unarg = va_arg(flags.list, unsigned int);
+    flags.sarg = (size_t)&flags.unarg;
+    arg = flags.sarg;
+    str = ft_dectohex(arg);
+    ft_putstr("0x");
     ft_putstr(str);
     free(str);
 }
@@ -120,9 +148,9 @@ char    *ft_dectohex(size_t arg)
     str = malloc(count + 1);
     if (!str)
     {
-        free(str);
         return (0);
     }
+    // printf("\nsarg---%zu\n", flags.sarg);
     i = count - 1;
     while (flags.sarg)
     {
