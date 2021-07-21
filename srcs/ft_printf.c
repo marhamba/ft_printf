@@ -51,25 +51,8 @@ void	ft_treat_unsigned()
 {
 	char *str;
 
-	flags.uarg = va_arg(flags.list, long);
-	str = ft_itoa(flags.uarg);
-	if (str[0] == '-' && flags.uarg != LONG_MIN)
-	{
-		flags.uarg *= (-1);
-		flags.uarg = UINT_MAX - flags.uarg + 1;
-		free(str);
-		str = ft_itoa(flags.uarg);	
-	}
-	else if (flags.uarg == LONG_MAX)
-	{
-		free(str);
-		str = ft_itoa(UINT_MAX);
-	}
-	else if (flags.uarg == LONG_MIN)
-	{
-		free(str);
-		str = ft_itoa(0);
-	}
+	flags.point = va_arg(flags.list, unsigned int);
+	str = ft_itoa(flags.point);
 	ft_putstr(str);
 	free(str);
 }

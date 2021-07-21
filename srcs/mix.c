@@ -78,6 +78,8 @@ void	ft_check_convs(char *format)
 		}
 		else if (*format == 'p')
 			ft_treat_pointer();
+		else if (*format == '%')
+			ft_putchar('%');
 }
 
 void	ft_printf2(char *print)

@@ -122,11 +122,17 @@ void    ft_treat_pointer()
     char *str;
     size_t arg;
 
-    flags.unarg = va_arg(flags.list, unsigned int);
-    flags.sarg = (size_t)&flags.unarg;
-    arg = flags.sarg;
-    str = ft_dectohex(arg);
+    flags.sarg = va_arg(flags.list, size_t);
     ft_putstr("0x");
+    if (flags.sarg == 0)
+    {
+        // ft_putstr("0x");
+        ft_putchar('0');
+        return ;
+    }
+    // flags.sarg = (size_t)flags.unarg;
+    // arg = flags.sarg;
+    str = ft_dectohex(flags.sarg);
     ft_putstr(str);
     free(str);
 }
@@ -152,6 +158,7 @@ char    *ft_dectohex(size_t arg)
     }
     // printf("\nsarg---%zu\n", flags.sarg);
     i = count - 1;
+
     while (flags.sarg)
     {
         mod = flags.sarg % 16;

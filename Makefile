@@ -28,7 +28,7 @@ fclean : clean
 re : fclean all
 
 compile: $(NAME)
-		@gcc libftprintf.a main.c && ./a.out
+		@gcc libftprintf.a main.c && ./a.out | cat -e
 
 .PHONY: all clean fclean re .c.o
 
