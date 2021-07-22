@@ -137,60 +137,106 @@ void    ft_treat_pointer()
     free(str);
 }
 
-char    *ft_dectohex(size_t arg)
+// char    *ft_dectohex(size_t arg)
+// {
+//     int i;
+//     char *str;
+//     int mod;
+//     int count;
+
+//     count = 0;
+//     i = 0;
+//     while (arg)
+//     {
+//         arg /= 16;
+//         count++;
+//     }
+//     str = malloc(count + 1);
+//     if (!str)
+//     {
+//         return (0);
+//     }
+//     // printf("\nsarg---%zu\n", flags.sarg);
+//     i = count - 1;
+
+//     while (flags.sarg)
+//     {
+//         mod = flags.sarg % 16;
+//         flags.sarg /= 16;
+//         if (mod > 9)
+//         {
+//             if (flags.areg == 1)
+//                  mod += 55;
+//             else
+//                 mod += 87;
+//         }
+//         else
+//             mod += 48;
+//         str[i] = mod;
+//         i--;
+//     }
+//     return(str);
+// }
+
+char *ft_dectohex(size_t arg)
 {
-    int i;
-    char *str;
-    int mod;
     int count;
+    int mod;
+    char *str;
 
     count = 0;
-    i = 0;
     while (arg)
     {
         arg /= 16;
         count++;
     }
     str = malloc(count + 1);
-    if (!str)
-    {
-        return (0);
-    }
-    // printf("\nsarg---%zu\n", flags.sarg);
-    i = count - 1;
-
-    while (flags.sarg)
+    count -= 1;
+    while(count)
     {
         mod = flags.sarg % 16;
-        flags.sarg /= 16;
         if (mod > 9)
         {
             if (flags.areg == 1)
-                 mod += 55;
+                mod += 18;
             else
-                mod += 87;
+                mod += 49;
         }
         else
             mod += 48;
-        str[i] = mod;
-        i--;
+        str[count] = mod;
+        count--;
     }
-    return(str);
+    printf("check---%s\n", str);
+    free(str);
 }
 
 void    ft_treat_hexa()
 {
     char *str;
     size_t arg;
-    flags.sarg = va_arg(flags.list, unsigned int);
-    arg = flags.sarg;
 
-    if (arg == 0)
-    {
+    flags.sarg = va_arg(flags.list, size_t);
+    arg = flags.sarg;
+    if (flags.sarg == 0)
         ft_putchar('0');
-        return ;
-    }
     str = ft_dectohex(arg);
-    ft_putstr(str);
-    free(str);
 }
+
+
+// void    ft_treat_hexa()
+// {
+//     char *str;
+//     size_t arg;
+//     flags.sarg = va_arg(flags.list, unsigned int);
+//     arg = flags.sarg;
+
+//     if (arg == 0)
+//     {
+//         ft_putchar('0');
+//         return ;
+//     }
+//     str = ft_dectohex(arg);
+//     ft_putstr(str);
+//     free(str);
+// }
