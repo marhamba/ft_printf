@@ -6,15 +6,15 @@
 /*   By: marhamba <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/11 15:29:07 by marhamba          #+#    #+#             */
-/*   Updated: 2021/02/13 09:48:23 by marhamba         ###   ########.fr       */
+/*   Updated: 2021/07/23 11:29:06 by tumolabs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int		ft_len(long num)
+static int	ft_len(long num)
 {
-	int len;
+	int	len;
 
 	len = 0;
 	if (num < 0)
@@ -32,24 +32,31 @@ static int		ft_len(long num)
 	return (len);
 }
 
-char			*ft_itoa(long n)
+char	*ft_itoa(long n)
 {
-	int		length;
+	int		lenght;
 	char	*str;
 	int		i;
-	long num;
+	long	num;
 
 	num = n;
-	length = ft_len(num);
-	if (!(str = (char*)malloc(sizeof(char) * length + 1)))
+	lenght = ft_len(num);
+	str = (char *)malloc(sizeof(char) * lenght + 1);
+	if (!str)
 		return (NULL);
 	i = 0;
+	str = chgitem(lenght, str, i, num);
+	return (str);
+}
+
+char	*chgitem(int	lenght, char *str, int i, long num)
+{
 	if (num < 0)
 	{
 		str[i] = '-';
 		num *= -1;
 	}
-	i = length - 1;
+	i = lenght - 1;
 	if (num == 0)
 		str[i] = '0';
 	while (num > 0)
@@ -57,7 +64,6 @@ char			*ft_itoa(long n)
 		str[i--] = num % 10 + 48;
 		num /= 10;
 	}
-	str[length] = '\0';
-	// printf("\nbarev---%s\n", str);
+	str[lenght] = '\0';
 	return (str);
 }

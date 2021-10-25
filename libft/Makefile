@@ -21,7 +21,7 @@ $(NAME) : ${OBJS}
 all : ${NAME}
 
 clean :
-	${RM} ${OBJS} ${BONUS_OBJS}
+	${RM} ${OBJS} ${BONUS_OBJS} ${NAME}
 
 fclean : clean
 	${RM} ${NAME}

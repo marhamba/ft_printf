@@ -1,125 +1,56 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tumolabs <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/07/23 18:12:12 by tumolabs          #+#    #+#             */
+/*   Updated: 2021/07/23 18:59:58 by tumolabs         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_printf.h"
 
-void	ft_treat_char()
+void	make_zeros(int mek)
 {
-	int		space;
-	int		printed;
-
-	printed = 0;
-	if (flags.width > 0 && !flags.minus)
-	{
-		space = flags.width - 1;
-		while (space > 0)
-		{
-			ft_putchar(' ');
-			space--;
-		}
-		if (flags.negative)
-			ft_putchar('-');
-		if (printed == 0)
-		{
-			ft_putchar(flags.arg);
-			printed = 1;
-		}
-	}
-	if (flags.minus && flags.width)
-	{
-		space = flags.width - 1;
-		if (flags.negative)
-			ft_putchar('-');
-		if (printed == 0)
-		{
-			ft_putchar(flags.arg);
-			printed = 1;
-		}
-		while (space > 0)
-		{
-			ft_putchar(' ');
-			space--;
-		}
-	}
-	else if ((flags.width == 0 && flags.minus == 0 && printed == 0)
-		|| (!flags.width && flags.minus && printed == 0))
-	{
-		ft_putchar(flags.arg);
-		printed = 1;
-	}
-	
+	mek = 0;
+	g_flags.arg = 0;
+	g_flags.unarg = 0;
+	g_flags.areg = 0;
+	g_flags.point = 0;
+	g_flags.string = 0;
+	g_flags.unsignedd = 0;
 }
 
-void	ft_treat_unsigned()
+void	ft_printf2(char *print)
 {
-	char *str;
+	int	mek;
 
-	flags.point = va_arg(flags.list, unsigned int);
-	str = ft_itoa(flags.point);
-	ft_putstr(str);
-	free(str);
-}
-
-void	ft_treat_string(char *format)
-{
-	int	space;
-	int	len;
-
-	len = ft_strlen(flags.string);
-	if (flags.width > flags.prec && flags.prec != 0)
+	mek = 0;
+	while (*print)
 	{
-		space = flags.width - flags.prec;
-		len = flags.width - space;
-	}
-	else if (flags.width == 0 && flags.prec == 0)
-		space = 0;
-	else if (!flags.width && flags.dot && flags.isprec == 0)
-		return ;
-	else if (flags.width < flags.prec && flags.prec < len)
-	{
-		len = flags.prec;
-		space = 0;
-	}
-	if (flags.prec == 0 && flags.dot == 0 && flags.width && flags.isprec == 0)
-	{
-		space = flags.width - len;
-		len = ft_strlen(flags.string);
-	}
-	else if (flags.width > flags.prec && flags.prec == 0)
-	{
-		len = 0;
-		space = flags.width;
-	}
-	if (flags.minus)
-	{
-		while (len > 0)
+		if (*print == '%')
 		{
-			ft_putchar(*flags.string);
-			len--;
-			flags.string++;
+			make_zeros(mek);
+			print++;
+			ft_check_convs(print);
+			print++;
+			continue ;
 		}
-	}
-	while (space > 0)
-	{
-		ft_putchar(' ');
-		space--;
-	}
-	if (!flags.minus)
-	{
-		while (len > 0)
-		{
-			ft_putchar(*flags.string);
-			len--;
-			flags.string++;
-		}
+		ft_putchar(*print);
+		print++;
 	}
 }
 
-int		ft_printf(const char *format, ...)
+int	ft_printf(const char *format, ...)
 {
-	char *print;
+	char	*print;
 
-	flags.count = 0;
-	va_start(flags.list, format);
+	g_flags.count = 0;
+	va_start(g_flags.list, format);
 	print = (char *)format;
-    ft_printf2(print);
-	va_end(flags.list);
-	return (flags.count);	
+	ft_printf2(print);
+	va_end(g_flags.list);
+	return (g_flags.count);
 }

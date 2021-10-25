@@ -4,7 +4,7 @@ LIBFT		= ./libft/libft.a
 NAME		= libftprintf.a
 CC			= gcc
 RM			= rm -f
-#CFLAGS		= -Wall -Wextra -Werror
+CFLAGS		= -Wall -Wextra -Werror
 AR			= ar csr
 
 .c.o :
@@ -26,9 +26,6 @@ fclean : clean
 	${RM} ${NAME}
 
 re : fclean all
-
-compile: $(NAME)
-		@gcc libftprintf.a main.c && ./a.out
 
 .PHONY: all clean fclean re .c.o
 
